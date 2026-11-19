@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="asuka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AsukaRVC-SVC — RVC Singing Studio</title>
+<link rel="stylesheet" href="/static/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='4' fill='%23d81f2a'/><path d='M4 54h56v4H4z' fill='%2317100f'/><path d='M20 22v20M28 15v34M36 24v16M44 19v26' stroke='white' stroke-width='4' stroke-linecap='square'/></svg>">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 13v-2M8 16V8M12 19V5M16 16V8M20 13v-2" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+      </div>
+      <div class="brand-text">
+        <h1>Asuka<b>RVC</b>-SVC</h1>
+        <span>ARVC-SVC · singing synth</span>
+      </div>
+    </div>
+
+    <div class="project-field">
+      <input id="projectName" class="project-name" spellcheck="false" value="Untitled">
+      <select id="projectSelect" class="project-select" title="Open project"></select>
+    </div>
+
+    <div class="hdr-group">
+      <label class="mini-field">BPM<input id="bpm" type="number" min="20" max="300" step="1" value="104"></label>
+      <label class="mini-field">Key
+        <select id="keySel">
+          <option>C major</option><option>G major</option><option>D major</option><option>A major</option>
+          <option>E major</option><option>F major</option><option>Bb major</option><option>Eb major</option>
+          <option>A minor</option><option>E minor</option><option>B minor</option><option>D minor</option>
+          <option>G minor</option><option>C minor</option><option>F minor</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="transport">
+      <button id="btnRewind" class="icon-btn" title="Back to start (Home)">
+        <svg viewBox="0 0 24 24"><path d="M6 5v14M20 6l-9 6 9 6z"/></svg>
+      </button>
+      <button id="btnPlay" class="icon-btn play" title="Play / pause (Space)">
+        <svg class="ico-play" viewBox="0 0 24 24"><path d="M8 5l12 7-12 7z"/></svg>
+        <svg class="ico-pause hidden" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM14 5h4v14h-4z"/></svg>
+      </button>
+      <button id="btnStop" class="icon-btn" title="Stop">
+        <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+      </button>
+      <span id="timeDisplay" class="time-display">0:00.0</span>
+      <span id="renderBadge" class="badge hidden"></span>
+    </div>
+
+    <div class="hdr-actions">
+      <label class="mini-field theme-field" title="Studio theme">Theme
+        <select id="themeSel"></select>
+      </label>
+      <button id="btnUndo" class="icon-btn ghost" title="Undo (Ctrl+Z)">
+        <svg viewBox="0 0 24 24"><path d="M9 7L4 12l5 5M4 12h9a6 6 0 1 1 0 12" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      </button>
+      <button id="btnSave" class="ghost">Save</button>
+      <button id="btnRender" class="primary" title="Render the song (Ctrl+Enter)">
+        <svg viewBox="0 0 24 24" class="btn-ico"><path d="M12 3v10m0 0l-4-4m4 4l4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="1.9" fill="none" stroke-linecap="round"/></svg>
+        Render voice
+      </button>
+    </div>
+  </header>
+
+  <!-- ---------------------------------------------------------------- -->
+  <aside class="sidebar">
+    <section class="card">
+      <div class="card-head">
+        <h2>Tracks</h2>
+        <button id="btnAddTrack" class="tiny">+ Add</button>
+      </div>
+      <div id="trackList" class="track-list"></div>
+      <div class="track-help">Drag notes in the roll · double-click to edit lyrics</div>
+    </section>
+
+    <section class="card grow">
+      <div class="card-head">
+        <h2>Voicebanks</h2>
+        <button id="btnVoiceUpload" class="tiny">Upload</button>
+      </div>
+      <div id="voiceList" class="voice-list"></div>
+      <input type="file" id="filePth" accept=".pth" hidden>
+      <input type="file" id="fileIndex" accept=".index" hidden>
+      <div id="uploadDrop" class="upload-drop">
+        <svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5l5 5M5 20h14" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+        <div><b>Drop a .pth model</b><span>optional .index · RVC v1 / v2</span></div>
+      </div>
+    </section>
+
+    <section class="card rvc-card">
+      <div class="card-head">
+        <h2>AI engine</h2>
+        <span id="rvcChip" class="chip muted">checking…</span>
+      </div>
+      <div id="rvcInfo" class="small-text">Probing the RVC environment…</div>
+      <div class="row gap">
+        <button id="btnRvcCheck" class="tiny">Re-check</button>
+        <button id="btnRvcHelp" class="tiny">Setup help</button>
+        <a id="linkVoiceLab" class="tiny-link hidden" href="/manage" title="Open the Gradio Voice Lab">Voice Lab</a>
+      </div>
+    </section>
+  </aside>
+
+  <!-- ---------------------------------------------------------------- -->
+  <main class="center">
+    <div class="roll-toolbar">
+      <div class="tool-group">
+        <button class="tool active" data-tool="select" title="Select / move (V)">
+          <svg viewBox="0 0 24 24"><path d="M5 3l14 9-6 1-3 6z" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="tool" data-tool="draw" title="Draw notes (N)">
+          <svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16z" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="tool" data-tool="erase" title="Erase (E)">
+          <svg viewBox="0 0 24 24"><path d="M4 15l7-7 6 6-4 4H6zM14 19h6" stroke-width="1.7" fill="none" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="tb-sep"></div>
+      <div class="tool-group">
+        <button id="btnZoomOut" class="tool" title="Zoom out">−</button>
+        <span id="zoomLabel" class="zoom-label">100%</span>
+        <button id="btnZoomIn" class="tool" title="Zoom in">+</button>
+      </div>
+      <div class="tb-sep"></div>
+      <label class="mini-field inline">Snap
+        <select id="snapSel">
+          <option value="1">1 beat</option>
+          <option value="0.5">1/2</option>
+          <option value="0.25" selected>1/4</option>
+          <option value="0.125">1/8</option>
+          <option value="0">off</option>
+        </select>
+      </label>
+      <label class="mini-field inline">Default lyric
+        <input id="defaultLyric" value="la" spellcheck="false" class="lyric-input-small">
+      </label>
+      <div class="tb-right">
+        <button id="btnDuplicate" class="tiny ghost" title="Duplicate selected (Ctrl+D)">Duplicate</button>
+        <button id="btnDeleteNotes" class="tiny ghost" title="Delete selected (Del)">Delete</button>
+      </div>
+    </div>
+
+    <div id="rollWrap" class="roll-wrap">
+      <canvas id="roll"></canvas>
+      <div id="lyricEditor" class="lyric-editor hidden">
+        <input id="lyricEditorInput" maxlength="60" spellcheck="false">
+      </div>
+      <div id="rollEmpty" class="roll-empty hidden">
+        <p>Piano roll is empty</p>
+        <button id="btnDemoLoad" class="primary small">Load the demo song</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- ---------------------------------------------------------------- -->
+  <aside class="inspector">
+    <section class="card">
+      <div class="card-head">
+        <h2>Note</h2>
+        <span id="selCount" class="chip muted">none</span>
+      </div>
+      <div id="notePanel" class="note-panel disabled">
+        <label class="field">Lyric
+          <input id="noteLyric" spellcheck="false" placeholder="la">
+        </label>
+        <div class="pitch-row">
+          <button id="btnOctDown" class="tiny ghost">− 8ve</button>
+          <div class="pitch-display">
+            <b id="notePitchName">—</b>
+            <span id="noteMidi">—</span>
+          </div>
+          <button id="btnOctUp" class="tiny ghost">+ 8ve</button>
+        </div>
+        <div class="two-col">
+          <label class="field">Start (beat)<input id="noteStart" type="number" step="0.25" min="0"></label>
+          <label class="field">Length<input id="noteDur" type="number" step="0.25" min="0.05"></label>
+        </div>
+        <label class="field">Velocity <span id="noteVelVal" class="val">82</span>
+          <input id="noteVel" type="range" min="5" max="100" value="82">
+        </label>
+        <div class="phonemes">
+          <div class="label">Phonemes <span id="phoneHint">—</span></div>
+          <div id="phoneChips" class="phone-chips"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Expression</h2><button id="btnResetExpr" class="tiny ghost">Reset</button></div>
+      <div class="ctl-grid">
+        <label class="ctl">Vibrato depth <span id="v_vibratoDepth" class="val">20</span>
+          <input id="vibratoDepth" type="range" min="0" max="80" step="1">
+        </label>
+        <label class="ctl">Vibrato rate <span id="v_vibratoRate" class="val">5.6</span>
+          <input id="vibratoRate" type="range" min="3" max="9" step="0.1">
+        </label>
+        <label class="ctl">Scoop <span id="v_scoop" class="val">12</span>
+          <input id="scoop" type="range" min="0" max="60" step="1">
+        </label>
+        <label class="ctl">Breathiness <span id="v_breathiness" class="val">12</span>
+          <input id="breathiness" type="range" min="0" max="100" step="1">
+        </label>
+        <label class="ctl">Brightness <span id="v_brightness" class="val">55</span>
+          <input id="brightness" type="range" min="0" max="100" step="1">
+        </label>
+        <label class="ctl">Formant <span id="v_formantShift" class="val">1.00</span>
+          <input id="formantShift" type="range" min="0.75" max="1.35" step="0.01">
+        </label>
+        <label class="ctl">Dynamics <span id="v_dynamics" class="val">50</span>
+          <input id="dynamics" type="range" min="0" max="100" step="1">
+        </label>
+        <label class="ctl">Jitter <span id="v_jitter" class="val">0.6</span>
+          <input id="jitter" type="range" min="0" max="3" step="0.1">
+        </label>
+      </div>
+    </section>
+
+    <section class="card grow">
+      <div class="card-head"><h2>Voice &amp; RVC</h2></div>
+      <label class="field">Voicebank
+        <select id="voiceSelect"><option value="">— DSP singer (no RVC) —</option></select>
+      </label>
+      <label class="field">Conversion
+        <select id="modeSel">
+          <option value="auto">Auto — RVC when available</option>
+          <option value="rvc">Force RVC</option>
+          <option value="source">DSP singer only</option>
+        </select>
+      </label>
+      <div class="two-col">
+        <label class="field">Pitch shift<input id="pitchShift" type="number" step="1" min="-24" max="24" value="0"></label>
+        <label class="field">Speaker ID<input id="speakerId" type="number" step="1" min="0" value="0"></label>
+      </div>
+      <div class="two-col">
+        <label class="field">F0 method
+          <select id="f0Method">
+            <option value="rmvpe">RMVPE (best)</option>
+            <option value="crepe">CREPE</option>
+            <option value="fcpe">FCPE (fast)</option>
+            <option value="hybrid[rmvpe+crepe]">Hybrid</option>
+          </select>
+        </label>
+        <label class="field">Index rate <span id="v_indexRate" class="val">75%</span><input id="indexRate" type="range" min="0" max="100" step="1"></label>
+      </div>
+      <label class="field">Protect <span id="v_protect" class="val">0.33</span>
+        <input id="protect" type="range" min="0" max="50" step="1">
+      </label>
+      <div class="two-col">
+        <label class="field">Reverb <span id="v_reverb" class="val">12%</span><input id="reverb" type="range" min="0" max="60" step="1"></label>
+        <label class="field">Master gain <span id="v_gain" class="val">90%</span><input id="gain" type="range" min="20" max="120" step="1"></label>
+      </div>
+      <label class="check"><input id="compressor" type="checkbox" checked> Compressor</label>
+      <div class="voice-note" id="voiceHint">Pick a voicebank to sing with your own RVC model.</div>
+    </section>
+  </aside>
+
+  <!-- ---------------------------------------------------------------- -->
+  <footer class="bottom">
+    <div class="bottom-head">
+      <div class="now">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">Ready</span>
+      </div>
+      <div class="render-meta" id="renderMeta"></div>
+      <div class="row gap">
+        <button id="btnCancel" class="tiny ghost hidden">Cancel</button>
+        <button id="btnExport" class="tiny ghost" disabled>Download WAV</button>
+        <button id="btnCompare" class="tiny ghost" disabled>A/B source</button>
+      </div>
+    </div>
+    <div class="wave-wrap">
+      <canvas id="wave"></canvas>
+      <div id="waveplay" class="wave-play"></div>
+    </div>
+    <div class="progress-row">
+      <div class="progress"><div id="renderBar" class="progress-bar"></div></div>
+      <span id="renderStatus" class="small-text">No render yet</span>
+    </div>
+    <div id="renderLog" class="render-log hidden"></div>
+  </footer>
+</div>
+
+<div id="toastWrap" class="toast-wrap"></div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-card">
+    <div class="modal-head"><h2 id="modalTitle">AsukaRVC-SVC</h2><button id="modalClose" class="icon-btn ghost">×</button></div>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

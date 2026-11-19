@@ -1,0 +1,7 @@
+-r pre-requirements.txt 
+
+# UI
+spaces
+git+https://huggingface.co/Asukaa02/Gradio
+fastapi>=0.100.0
+uvicorn>=0.23.0

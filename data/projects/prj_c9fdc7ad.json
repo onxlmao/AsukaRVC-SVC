@@ -1,0 +1,328 @@
+{
+ "schema": 2,
+ "id": "prj_c9fdc7ad",
+ "name": "Neon Dawn",
+ "bpm": 104.0,
+ "timeSignature": [
+  4,
+  4
+ ],
+ "key": "C major",
+ "tracks": [
+  {
+   "id": "trk_0de8473d",
+   "name": "Lead",
+   "voiceId": null,
+   "gain": 0.08,
+   "pan": 0.0,
+   "muted": false,
+   "color": "#8b5cf6",
+   "notes": [
+    {
+     "id": "n_e12c568a",
+     "midi": 67,
+     "start": 0.0,
+     "dur": 0.5,
+     "lyric": "hel",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_3791b6e3",
+     "midi": 67,
+     "start": 0.5,
+     "dur": 0.5,
+     "lyric": "lo",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_6b559109",
+     "midi": 69,
+     "start": 1.0,
+     "dur": 1.0,
+     "lyric": "world",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_52fc8be6",
+     "midi": 72,
+     "start": 2.0,
+     "dur": 0.5,
+     "lyric": "we",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_0d90c79b",
+     "midi": 71,
+     "start": 2.5,
+     "dur": 0.5,
+     "lyric": "are",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_d18e7524",
+     "midi": 69,
+     "start": 3.0,
+     "dur": 1.0,
+     "lyric": "sing",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_64150e76",
+     "midi": 67,
+     "start": 4.0,
+     "dur": 0.5,
+     "lyric": "ing",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_a3570300",
+     "midi": 64,
+     "start": 4.5,
+     "dur": 0.5,
+     "lyric": "in",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_32e80415",
+     "midi": 65,
+     "start": 5.0,
+     "dur": 1.0,
+     "lyric": "the",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_53b45ee3",
+     "midi": 67,
+     "start": 6.0,
+     "dur": 0.5,
+     "lyric": "light",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_94256303",
+     "midi": 69,
+     "start": 6.5,
+     "dur": 0.5,
+     "lyric": "of",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_4ef532ed",
+     "midi": 67,
+     "start": 7.0,
+     "dur": 1.0,
+     "lyric": "dawn",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_fd40d8f1",
+     "midi": 72,
+     "start": 8.0,
+     "dur": 1.0,
+     "lyric": "hear",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_27480266",
+     "midi": 71,
+     "start": 9.0,
+     "dur": 0.5,
+     "lyric": "my",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_bb16f441",
+     "midi": 69,
+     "start": 9.5,
+     "dur": 0.5,
+     "lyric": "voice",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_b79e350e",
+     "midi": 67,
+     "start": 10.0,
+     "dur": 1.0,
+     "lyric": "rise",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_f58008a6",
+     "midi": 69,
+     "start": 11.0,
+     "dur": 1.0,
+     "lyric": "up",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_e5ff15c3",
+     "midi": 72,
+     "start": 12.0,
+     "dur": 0.5,
+     "lyric": "in",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_430a84d2",
+     "midi": 71,
+     "start": 12.5,
+     "dur": 0.5,
+     "lyric": "to",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_c8a9cfe0",
+     "midi": 69,
+     "start": 13.0,
+     "dur": 1.0,
+     "lyric": "the",
+     "velocity": 0.86
+    },
+    {
+     "id": "n_d4af61ad",
+     "midi": 67,
+     "start": 14.0,
+     "dur": 2.0,
+     "lyric": "sky",
+     "velocity": 0.86
+    }
+   ]
+  },
+  {
+   "id": "trk_c37ae8d6",
+   "name": "Harmony",
+   "voiceId": null,
+   "gain": 0.38,
+   "pan": 0.15,
+   "muted": false,
+   "color": "#22d3ee",
+   "notes": [
+    {
+     "id": "n_d0ceedb5",
+     "midi": 64,
+     "start": 0.0,
+     "dur": 1.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_e32d422a",
+     "midi": 64,
+     "start": 1.0,
+     "dur": 1.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_695ec5eb",
+     "midi": 67,
+     "start": 2.0,
+     "dur": 1.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_f7ec9898",
+     "midi": 64,
+     "start": 3.0,
+     "dur": 1.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_7cd5d8d6",
+     "midi": 64,
+     "start": 4.0,
+     "dur": 1.0,
+     "lyric": "ah",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_9695cbdd",
+     "midi": 60,
+     "start": 5.0,
+     "dur": 1.0,
+     "lyric": "ah",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_2e4642cc",
+     "midi": 62,
+     "start": 6.0,
+     "dur": 1.0,
+     "lyric": "ah",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_aa3c2c41",
+     "midi": 64,
+     "start": 7.0,
+     "dur": 1.0,
+     "lyric": "ah",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_9833c173",
+     "midi": 67,
+     "start": 8.0,
+     "dur": 2.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_c6a69999",
+     "midi": 64,
+     "start": 10.0,
+     "dur": 2.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_df106615",
+     "midi": 67,
+     "start": 12.0,
+     "dur": 2.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    },
+    {
+     "id": "n_6bf0dc26",
+     "midi": 64,
+     "start": 14.0,
+     "dur": 2.0,
+     "lyric": "ooh",
+     "velocity": 0.42
+    }
+   ]
+  }
+ ],
+ "voice": {
+  "id": null,
+  "pitch": 0,
+  "indexRate": 0.75,
+  "protect": 0.33,
+  "f0Method": "rmvpe",
+  "volumeEnvelope": 0.9,
+  "sid": 0,
+  "transpose": 0,
+  "formantShift": 1,
+  "vibratoRate": 5.6,
+  "vibratoDepth": 0.2,
+  "vibratoDelay": 0.16,
+  "vibratoRamp": 0.28,
+  "scoop": 0.12,
+  "breathiness": 0.12,
+  "brightness": 0.55,
+  "jitter": 0.006,
+  "dynamics": 0.5,
+  "reverb": 0.12,
+  "compressor": true,
+  "gain": 0.9
+ },
+ "loop": {
+  "start": 0,
+  "end": 16
+ },
+ "created": 1794900285,
+ "updated": 1794902007
+}
